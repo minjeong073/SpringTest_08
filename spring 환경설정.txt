@@ -1,0 +1,102 @@
+
+<Spring Framework>
+
+기능 : 
+Handler Mapping, controller, View Resolver, View
+
+--------------------------------------------------
+
+eclipse
++
+spring
+MyBatis (db query 관리)
+jackson library (json)
+
+spring boot
+: framework lib 를 쉽게 처리할 수 있도록 환경 설정해줌
+통합 환경 IDE : Spring Tool Suite (sts)
+
+
+servlet 보다는 spring 을 더 많이 씀
+
+(연습을 위해)예제, 문제 sts 따로 설치해서 수업할 예정
+
+--------------------------------------------------
+
+확장 프로그램 설치
+- html, css, jsp 기능 없음
+-> Help - Eclipse Market - java and web 검색 -> eclipse enterprise java and Web developer tools (xml html css js jsp) install
+
+프로젝트 만들기
+- Create New Spring Starter Project
+	type : Gradle
+	Group : com.ming
+
+- dependencies
+ : 
+
+
+--------------------------------------------------
+
+local - SpringExample(실행 프로젝트) - start
+- console 에 INFO 12256 ... 등의 log 찍힘
+
+web page 에서 page error 대표적
+: Whitelabel Error Page
+(type=Not Found, status=404) : 주소 매핑 또는 입력 잘못될 경우
+
+--------------------------------------------------
+
+
+1. Annotation
+
+Controller 설정
+
+* Controller : 웹 서버 만드는 프로그램의 가장 앞쪽의 req 전달 받고, resp 만들어 전송하는 부분
+
+<servlet 과 비교>
+
+public class HelloController extends HttpServlet {
+	@Override
+	public void doGet( ... ) { }
+}
+=
+동일
+=
+@Controller
+public class HelloController {
+	@RequestMapping("/hello") 
+	public void Hello() {
+		return "HelloWorld";
+	}
+}
+
+@RequestMapping("/hello")
+controller : 메서드 하나 당 페이지 하나
+
+@ResponseBody
+return type 에 맞춰서 알아서 resp 만들어서 알아서 전송해줌
+
+Jackson Library
+: java 기반 json util library
+: spring-boot-starter-web 에 포함
+: 객체, 자료 구조 리턴 타입을 확인해서 자동으로 json 으로 변환해줌
+: resp type 결정해서 json 담아 전송
+:
+httpmessageconverter - return data 를 보고
+type 을 결정해서 response 에 담겨 전송됨
+
+
+ex)
+@ResponseBody
+public List<Map<String, Integer>> ... {
+	return list;
+}
+
+결과)
+
+[ {name:"김민정", birthday:19980730},
+  {name: ... },
+	...
+]
+
