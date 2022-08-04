@@ -14,8 +14,9 @@ public class Test01Controller {
 	@RequestMapping("/1")
 	@ResponseBody
 	public String stringResponse() {
-		return "테스트 프로젝트 완성";
+		return "<h2>테스트 프로젝트 완성</h2> <h4>해당 프로젝트를 통해서 문제 풀이를 진행합니다.</h4>";
 	}
+	// text type 이 html -> 그대로 해석해서 보여줌
 	
 	@RequestMapping("/2")
 	@ResponseBody
