@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- mybatis dtd -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.ming.spring.test.mybatis.dao.RealEstateDAO">
+ 
+ 	<select id="selectRealEstate" resultType="com.ming.spring.test.mybatis.model.RealEstate">
+ 	
+ 		SELECT
+ 			`id`
+ 			, `realtorId`
+ 			, `address`
+ 			, `area`
+ 			, `type`
+ 			, `price`
+ 			, `rentPrice`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		FROM
+ 			`real_estate`
+ 		WHERE
+ 			`id` = #{id};	
+ 	
+ 	</select>
+ </mapper>
