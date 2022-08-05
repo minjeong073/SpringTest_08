@@ -6,6 +6,7 @@
  
  <mapper namespace="com.ming.spring.test.mybatis.dao.RealEstateDAO">
  
+ 	<!-- 1. id 로 select -->
  	<select id="selectRealEstate" resultType="com.ming.spring.test.mybatis.model.RealEstate">
  	
  		SELECT
@@ -24,4 +25,59 @@
  			`id` = #{id};	
  	
  	</select>
+ 	
+ 	<!-- 
+ 	
+ 	부등호 입력
+ 	
+ 	- 방법 1.
+ 		< : &lt;
+ 		> : &gt;
+ 	- 방법 2.
+ 		<![CDATA[ 부등호 ]]>
+ 		
+ 	 -->
+ 	
+ 	<!-- 2. 월세 조건 select -->
+ 	<select id="selectRentPrice" resultType="com.ming.spring.test.mybatis.model.RealEstate">
+ 		
+ 		SELECT
+ 			`id`
+ 			, `realtorId`
+ 			, `address`
+ 			, `area`
+ 			, `type`
+ 			, `price`
+ 			, `rentPrice`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		FROM
+ 			`real_estate`
+ 		WHERE
+ 			`rentPrice` &lt; #{rent};
+ 	</select>
+ 	
+ 	
+ 	<!-- 3. 복합 조건 select -->
+ 	<select id="selectMatchRealEstate" resultType="com.ming.spring.test.mybatis.model.RealEstate">
+ 	
+ 		SELECT
+ 			`id`
+ 			, `realtorId`
+ 			, `address`
+ 			, `area`
+ 			, `type`
+ 			, `price`
+ 			, `rentPrice`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		FROM
+ 			`real_estate`
+ 		WHERE
+ 			`area` <![CDATA[>=]]> #{area} AND `price` <![CDATA[<=]]> #{price}
+ 		ORDER BY
+ 			`createdAt` DESC;	
+ 		
+ 	</select>
+ 	
  </mapper>
