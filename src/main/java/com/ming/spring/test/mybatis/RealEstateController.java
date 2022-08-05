@@ -13,13 +13,14 @@ import com.ming.spring.test.mybatis.bo.RealEstateBO;
 import com.ming.spring.test.mybatis.model.RealEstate;
 
 @Controller
+@RequestMapping("/mybatis/test01")
 public class RealEstateController {
 
 	@Autowired
 	private RealEstateBO realEstateBO;
 	
 	// 1. id 로 select
-	@RequestMapping("/mybatis/test01/1")
+	@RequestMapping("/1")
 	@ResponseBody
 	public RealEstate realEstate(@RequestParam("id") int id) {
 		RealEstate realEstate = realEstateBO.getRealEstate(id);
@@ -27,18 +28,29 @@ public class RealEstateController {
 	}
 	
 	// 2. 월세 조건 select
-	@RequestMapping("mybatis/test01/2")
+	@RequestMapping("/2")
 	@ResponseBody
-	public List<RealEstate> rentPrice(@RequestParam("rent") int rent) {
-		List<RealEstate> list = realEstateBO.getRentPrice(rent);
+	public List<RealEstate> realEstateAsRent(@RequestParam("rent") int rent) {
+		List<RealEstate> list = realEstateBO.getRealEstateAsRent(rent);
 		return list;
 	}
 	
 	// 3. 복합 조건 select
-	@RequestMapping("mybatis/test01/3")
+	@RequestMapping("/3")
 	@ResponseBody
 	public List<RealEstate> matchRealEstates(@RequestParam("area") int area, @RequestParam("price") int price) {
 		List<RealEstate> list = realEstateBO.getMatchingRealEstate(area, price);
 		return list;
+	}
+	
+	
+	// insert
+	// 1. 객체로 insert 하기
+	@RequestMapping("/insert/1")
+	public int insertRealEstateByObject() {
+		RealEstate realEstate = new RealEstate();
+		
+		
+		
 	}
 }

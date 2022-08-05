@@ -21,14 +21,20 @@ public class RealEstateBO {
 	}
 	
 	// 2. 월세 조건 select
-	public List<RealEstate> getRentPrice(int rent) {
-		List<RealEstate> list = realEstateDAO.selectRentPrice(rent);
+	public List<RealEstate> getRealEstateAsRent(int rent) {
+		List<RealEstate> list = realEstateDAO.selectRealEstateAsRent(rent);
 		return list;
 	}
 	
 	// 3. 복합 조건 select
 	public List<RealEstate> getMatchingRealEstate(int area, int price) {
-		List<RealEstate> list = realEstateDAO.selectMatchRealEstate(area, price);
-		return list;
+		return realEstateDAO.selectMatchRealEstate(area, price);
+	}
+	
+	// insert
+	// 1. 객체로 insert 하기
+	public int insertRealEstateByObject(RealEstate realEstate) {
+		return realEstateDAO.insertRealEstateByObject(realEstate);
+		
 	}
 }

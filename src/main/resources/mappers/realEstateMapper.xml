@@ -7,7 +7,7 @@
  <mapper namespace="com.ming.spring.test.mybatis.dao.RealEstateDAO">
  
  	<!-- 1. id 로 select -->
- 	<select id="selectRealEstate" resultType="com.ming.spring.test.mybatis.model.RealEstate">
+ 	<select id="selectRealEstate" parameterType="int" resultType="com.ming.spring.test.mybatis.model.RealEstate">
  	
  		SELECT
  			`id`
@@ -39,7 +39,7 @@
  	 -->
  	
  	<!-- 2. 월세 조건 select -->
- 	<select id="selectRentPrice" resultType="com.ming.spring.test.mybatis.model.RealEstate">
+ 	<select id="selectRealEstateAsRent" parameterType="int" resultType="com.ming.spring.test.mybatis.model.RealEstate">
  		
  		SELECT
  			`id`
@@ -59,7 +59,7 @@
  	
  	
  	<!-- 3. 복합 조건 select -->
- 	<select id="selectMatchRealEstate" resultType="com.ming.spring.test.mybatis.model.RealEstate">
+ 	<select id="selectMatchRealEstate" parameterType="int" resultType="com.ming.spring.test.mybatis.model.RealEstate">
  	
  		SELECT
  			`id`
@@ -74,10 +74,49 @@
  		FROM
  			`real_estate`
  		WHERE
- 			`area` <![CDATA[>=]]> #{area} AND `price` <![CDATA[<=]]> #{price}
+ 			<![CDATA[
+ 			`type` = '매매' AND
+ 			`area` >= #{area} AND `price` <= #{price}
+ 			]]>
+ 			
+ 			<!-- `area` <![CDATA[ >= ]]> #{area} -->
+ 			
  		ORDER BY
- 			`createdAt` DESC;	
+ 			`price` DESC;	
  		
  	</select>
+ 	
+ 	
+ 	<!-- insert -->
+ 	<!-- 1. 객체로 insert 하기 -->
+ 	<insert id="insertRealEstateByObject" parameterType="com.ming.spring.test.mybatis.model.RealEstate">
+ 		
+ 		INSERT INTO
+ 			`real_estate`
+ 		(
+ 			`realtorId`
+ 			, `address`
+ 			, `area`
+ 			, `type`
+ 			, `price`
+ 			, `rentPrice`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{realtorId}
+ 			, #{address}
+ 			, #{area}
+ 			, #{type}
+ 			, #{price}
+ 			, #{rentPrice}
+ 			, now()
+ 			, now()
+ 		)
+ 	
+ 	</insert>
+ 	
+ 	
  	
  </mapper>
