@@ -47,10 +47,28 @@ public class RealEstateController {
 	// insert
 	// 1. 객체로 insert 하기
 	@RequestMapping("/insert/1")
-	public int insertRealEstateByObject() {
+	@ResponseBody
+	public String insertRealEstateByObject() {
+		
 		RealEstate realEstate = new RealEstate();
+		realEstate.setRealtorId(3);
+		realEstate.setAddress("푸르지용 리버 303동 1104호");
+		realEstate.setArea(89);
+		realEstate.setType("매매");
+		realEstate.setPrice(100000);
 		
+		int count = realEstateBO.insertRealEstateByObject(realEstate);
 		
+		return "입력 성공 : " + count;
 		
+	}
+	
+	// 2. field 로 insert 하기
+	@RequestMapping("/insert/2")
+	@ResponseBody
+	public String insertRealEstate(@RequestParam("realtorId") int realtorId) {
+		int count = realEstateBO.insertRealEstate(realtorId, "썅떼빌리버 오피스텔 814호", 45, "월세", 100000, 120);
+		
+		return "입력 성공 : " + count;
 	}
 }
