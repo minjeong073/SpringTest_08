@@ -99,7 +99,7 @@
  			, `area`
  			, `type`
  			, `price`
- 			, `rentPrice`
+
  			, `createdAt`
  			, `updatedAt`
  		)
@@ -110,11 +110,14 @@
  			, #{area}
  			, #{type}
  			, #{price}
- 			, null
+
  			, now()
  			, now()
  		)
- 	
+ 	<!-- rentPrice 특징이 null 일 경우 
+ 	INSERT query 에 넣지 않아야 null 이 들어가게 됨 
+ 	아닐 경우 int 형이기 때문에 0 이 입력
+ 	-->
  	</insert>
  	
  	<!-- 2. field 로 insert 하기 -->
@@ -146,6 +149,31 @@
  		
  	</insert>
  	
+ 	
+ 	<!-- update -->
+ 	<update id="updateRealEstate" parameterType="map">
+ 		
+ 		UPDATE 
+ 			`real_estate` 
+ 		SET 
+	 		`type` = #{type}
+	 		, `price` = #{price}
+	 		, `updatedAt` = now()
+		WHERE
+			`id` = #{id}
+ 		
+ 	</update>
+ 	
+ 	
+ 	<!-- delete -->
+ 	<delete id="deleteRealEstate" parameterType="int">
+ 	
+ 		DELETE FROM
+ 			`real_estate`
+ 		WHERE
+ 			`id` = #{id}
+ 	
+ 	</delete>
  	
  	
  </mapper>

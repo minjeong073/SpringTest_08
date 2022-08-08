@@ -13,14 +13,14 @@ import com.ming.spring.test.mybatis.bo.RealEstateBO;
 import com.ming.spring.test.mybatis.model.RealEstate;
 
 @Controller
-@RequestMapping("/mybatis/test01")
+@RequestMapping("/mybatis/test")
 public class RealEstateController {
 
 	@Autowired
 	private RealEstateBO realEstateBO;
 	
 	// 1. id 로 select
-	@RequestMapping("/1")
+	@RequestMapping("/select/1")
 	@ResponseBody
 	public RealEstate realEstate(@RequestParam("id") int id) {
 		RealEstate realEstate = realEstateBO.getRealEstate(id);
@@ -28,7 +28,7 @@ public class RealEstateController {
 	}
 	
 	// 2. 월세 조건 select
-	@RequestMapping("/2")
+	@RequestMapping("/select/2")
 	@ResponseBody
 	public List<RealEstate> realEstateAsRent(@RequestParam("rent") int rent) {
 		List<RealEstate> list = realEstateBO.getRealEstateAsRent(rent);
@@ -36,7 +36,7 @@ public class RealEstateController {
 	}
 	
 	// 3. 복합 조건 select
-	@RequestMapping("/3")
+	@RequestMapping("/select/3")
 	@ResponseBody
 	public List<RealEstate> matchRealEstates(@RequestParam("area") int area, @RequestParam("price") int price) {
 		List<RealEstate> list = realEstateBO.getMatchingRealEstate(area, price);
@@ -70,5 +70,23 @@ public class RealEstateController {
 		int count = realEstateBO.insertRealEstate(realtorId, "썅떼빌리버 오피스텔 814호", 45, "월세", 100000, 120);
 		
 		return "입력 성공 : " + count;
+	}
+	
+	// update
+	@RequestMapping("/update")
+	@ResponseBody
+	public String updateRealEstate() {
+		int count = realEstateBO.updateRealEstate(26, "전세", 70000);
+		
+		return "수정 성공 : " + count;
+	}
+	
+	// delete
+	@RequestMapping("/delete")
+	@ResponseBody
+	public String deleteRealEstate(@RequestParam("id") int id) {
+		int count = realEstateBO.deleteRealEstate(id);
+		
+		return "삭제 성공 : " + count;
 	}
 }
