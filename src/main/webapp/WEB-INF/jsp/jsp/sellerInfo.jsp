@@ -14,11 +14,12 @@
 
 </head>
 <body>
-
-<div class="font-weight-bold">${title }</div>
-<div><img src="${seller.profileImage }"></div>
-<div class="display-4">${seller.nickname }</div>
-<div class="text-warning">${seller.temperature }</div>
+	<div class="container">		
+		<div class="font-weight-bold"><h2>${title }</h2></div>
+		<div><img width=200 src="${seller.profileImage }"></div>
+		<div class="display-4">${seller.nickname }</div>
+		<div class="text-warning">${seller.temperature }</div>
+	</div>
 
 </body>
 </html>

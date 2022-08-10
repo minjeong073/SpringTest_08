@@ -47,7 +47,8 @@
 
     </select>
 
-    <select id="selectSellerById" resultType="com.ming.spring.test.jsp.model.Seller">
+    <select id="selectSellerById" parameterType="int" 
+    resultType="com.ming.spring.test.jsp.model.Seller">
         SELECT
             `id`
              , `nickname`
@@ -57,7 +58,8 @@
              , `updatedAt`
         FROM
             `seller`
-
+		WHERE
+			`id` = #{id}
 
     </select>
 
