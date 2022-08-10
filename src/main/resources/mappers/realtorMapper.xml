@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- mybatis DTD -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.ming.spring.test.jsp.dao.RealtorDAO">
+ 	
+ 	<!-- form 으로 입력받은 값 저장하기 -->
+ 	<insert id="insertRealtor" parameterType="com.ming.spring.test.jsp.model.Realtor"
+ 	useGeneratedKeys="true" keyProperty="id">
+ 	
+ 		INSERT INTO
+ 			`realtor`
+ 		(
+ 			`office`
+ 			, `phoneNumber`
+ 			, `address`
+ 			, `grade`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{office}
+ 			, #{phoneNumber}
+ 			, #{address}
+ 			, #{grade}
+ 			, now()
+ 			, now()
+ 		)
+ 	
+ 	</insert>
+ 
+ </mapper>
