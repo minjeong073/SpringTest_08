@@ -12,8 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/jstl")
-public class JstlCoreTest02Controller {
+public class JstlTestController {
 
+	@GetMapping("/test01")
+	public String test01() {
+		return "jstl/test01";
+	}
+	
+	
 	@GetMapping("/test02")
 	public String test02_1(Model model) {
 		
@@ -73,5 +79,4 @@ public class JstlCoreTest02Controller {
 		
 		return "jstl/test02";
 	}
-	
 }
