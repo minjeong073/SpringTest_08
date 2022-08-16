@@ -11,4 +11,6 @@ public interface WeatherDAO {
 
 	// weather 정보 select
 	public List<Weather> selectWeatherList();
+
+	public int insertWeatherByObject(Weather weather);
 }

@@ -2,6 +2,8 @@ package com.ming.spring.test.jstl.weather.model;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Weather {
 	
 	private Date date;

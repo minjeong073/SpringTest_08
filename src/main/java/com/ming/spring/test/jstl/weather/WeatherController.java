@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -39,7 +40,14 @@ public class WeatherController {
 	
 	// 입력 받은 값 DB에 저장하기
 	@PostMapping("/add")
-	public String addWeather() {
+	public String addWeather(
+			@ModelAttribute Weather weather
+			, Model model) {
+		
+		weatherBO.addWeatherByObject(weather);
+		
+		model.addAttribute("weather", weather);
+		
 		return "redirect:jstl/weatherInfo";
 	}
 }

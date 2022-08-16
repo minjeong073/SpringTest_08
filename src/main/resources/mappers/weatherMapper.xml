@@ -24,6 +24,35 @@
 				
 	</select>
 	
+	<!-- form 입력 정보 insert -->
+	<insert id="insertWeatherByObject" parameterType="com.ming.spring.test.jstl.weather.model.Weather">
+		
+		INSERT INTO
+			`weatherhistory`
+		(
+			`date`
+			, `weather`
+			, `temperatures`
+			, `precipitation`
+			, `microDust`
+			, `windSpeed`
+			, `createdAt`
+			, `updatedAt`
+		)
+		VALUES
+		(
+			#{date}
+			, #{weather}
+			, #{temperatures}
+			, #{precipitation}
+			, #{microDust}
+			, #{windSpeed}
+			, now()
+			, now()
+		)	
+		
+	</insert>
+	
 	
 </mapper>
 

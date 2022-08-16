@@ -18,4 +18,8 @@ public class WeatherBO {
 	public List<Weather> getWeatherList() {
 		return weatherDAO.selectWeatherList();
 	}
+
+	public int addWeatherByObject(Weather weather) {
+		return weatherDAO.insertWeatherByObject(weather);
+	}
 }
