@@ -69,6 +69,7 @@
 					<td><fmt:formatNumber value="${cardBill.pay }" type="currency" /></td>
 					
 					<%-- 문자열을 Date 객체로 변환한 후 pattern 바꿔서 출력 --%>
+					<%-- 주어진 문자열이 어떤 패턴으로 날짜가 이루어져 있는지 알려줘야함 --%>
 					<fmt:parseDate value="${cardBill.date }" pattern="yyyy-MM-dd" var="date" />
 					<td><fmt:formatDate value="${date }" pattern="yyyy년 M월 dd일"/></td>
 					
