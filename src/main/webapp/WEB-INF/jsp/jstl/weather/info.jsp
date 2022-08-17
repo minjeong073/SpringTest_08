@@ -6,9 +6,6 @@
 
 <!-- jstl Format 라이브러리 -->    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-    
-<!-- jstl Function 라이브러리 -->    
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!-- bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -41,7 +38,7 @@
 	<div class="container">
 		<div class="d-flex">	
 			
-			<jsp:include page="weather-header.jsp" />
+			<jsp:include page="header.jsp" />
 			
 			<section>
 				<br>
@@ -61,8 +58,10 @@
 					<tbody>
 					<c:forEach var="weather" items="${weatherList }">
 						<tr>
-							<td><fmt:formatDate value="${weather.date }" pattern="yyyy년 M월 d일"/></td>
-							
+							<td>
+								
+								<fmt:formatDate value="${weather.date }" pattern="yyyy년 M월 d일"/>
+							</td>
 							<td>
 							<c:choose>
 								<c:when test="${weather.weather eq '맑음' }">
@@ -77,6 +76,9 @@
 								<c:when test="${weather.weather eq '비' }">
 									<img alt="비" src="http://marondal.com/material/images/dulumary/web/jstl/rainy.jpg">	
 								</c:when>
+								<c:otherwise>
+									<img alt="정보없음">
+								</c:otherwise>
 							</c:choose>
 							
 							</td>
@@ -94,7 +96,7 @@
 			</section>
 		</div>
 		
-		<jsp:include page="weather-footer.jsp" />
+		<jsp:include page="footer.jsp" />
 	
 	</div>
 	

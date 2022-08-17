@@ -181,12 +181,6 @@ public class JstlTestController {
 		
 		return "jstl/test04";
 	}
-	
-	
-	@GetMapping("/test05")
-	public String test05(Model model) {
-		
-		return "jstl/test05";
-	}
+
 	
 }

@@ -19,7 +19,22 @@ public class WeatherBO {
 		return weatherDAO.selectWeatherList();
 	}
 
+	// 입력받은 weather 정보 입력하기
 	public int addWeatherByObject(Weather weather) {
 		return weatherDAO.insertWeatherByObject(weather);
 	}
+	
+	// 수업 문제 풀이
+	public int addWeather2(
+			String date
+			, String weather
+			, double temperatures
+			, double precipitation
+			, String microDust
+			, double windSpeed) {
+		
+		return weatherDAO.insertWeather2(date, weather, temperatures, precipitation, microDust, windSpeed);
+		
+	}
+	
 }

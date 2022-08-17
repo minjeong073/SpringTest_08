@@ -1,8 +1,6 @@
 package com.ming.spring.test.jstl.weather.model;
 
-import java.util.Date;
-
-import org.springframework.format.annotation.DateTimeFormat;
+import java.sql.Date;
 
 public class Weather {
 	
