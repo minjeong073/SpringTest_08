@@ -23,7 +23,11 @@
 	<div class="container">
 	
 		<h2>즐겨찾기 목록</h2>
-		<table class="table">
+		
+		<a class="btn btn-secondary float-right" href="/ajax/bookmark/input">추가</a>
+		<br>
+		
+		<table class="table text-center mt-4">
 		
 			<thead>
 				<tr>
@@ -34,11 +38,11 @@
 			</thead>
 			
 			<tbody>
-			<c:forEach var="bookmark" items="bookmarkList" varStatus="status">
+			<c:forEach var="bookmark" items="${bookmarkList }" varStatus="status">
 				<tr>
 					<td>${status.count }</td>
 					<td>${bookmark.name }</td>
-					<td>${bookmark.url }</td>
+					<td><a href="${bookmark.url }" target="_blank"> ${bookmark.url } </a></td>
 				</tr>
 			
 			</c:forEach>
