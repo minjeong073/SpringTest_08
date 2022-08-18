@@ -69,7 +69,8 @@ public class WeatherController {
 		
 		int count = weatherBO.addWeather2(date, weather, temperatures, precipitation, microDust, windSpeed);
 		
-		return "삽입 결과 : " + count;
+		return "redirect:/jstl/weather/info";
+		
 				
 	}
 }

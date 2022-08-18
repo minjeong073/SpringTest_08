@@ -1,11 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-	<style>
+<title>입력화면</title>
+
+	<!-- bootstrap CDN link -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+<style>
 	section {
 	margin: 5;
 	width: 800px;
@@ -31,7 +43,7 @@
 					<div class="d-flex justify-content-between m-3">
 						<div>
 							<label>날짜</label>
-							<input type="text" class="form-control" name="date" value="<fmt:formatDate value="${date }" pattern="yyyyMMdd"/>">
+							<input type="text" class="form-control" id="date" name="date">
 						</div>
 						
 						<div class="w-25">
@@ -99,9 +111,19 @@
 	<script>
 		$(document).ready(function() {			
 			$("date").datepicker({
+				// dateFormat:"yy-mm-dd" // 형태여야 Weather 객체에 저장됨
 				
-			})
-		})
+				// controller의 requestParam 에 (2022-08-16) String 형태로 전달
+				// -> dao 통해 mapper 에서 #{date} 에 해당 String 이 전달
+				// mysql 에서 연월일을 - 로 구분하기 때문에 이 형식을 맞춘 String 형태면 date 타입으로 전달이 됨
+				
+				// 다른 형식으로 지정할 경우
+				// @RequestParam("date") 위에 @DateTimeFormat(pattern="yyyy년 MM월 dd일") 지정해줘야함
+				dateFormat:"yy년 mm월 dd일"
+				
+			});
+		});
+		
 	</script>
 </body>
 </html>
