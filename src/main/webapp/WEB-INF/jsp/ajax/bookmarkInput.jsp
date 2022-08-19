@@ -21,6 +21,11 @@
 	crossorigin="anonymous">
 </script>
 
+<style>
+	.hidden {
+		display:none;
+	}
+</style>
 </head>
 <body>
 
@@ -31,8 +36,14 @@
 		<br>
 		<div class="form-group">
 			<label>제목</label> <input type="text" class="form-control" id="nameInput" name="name" >
-			<label>주소</label> <input type="text" class="form-control" id="urlInput" name="url">
-			<button class="btn btn-success form-control mt-3" type="submit" id="addBtn">추가</button>
+			<label>주소</label>
+			<div class="d-flex">
+				<input type="text" class="form-control" id="urlInput" name="url">
+				<button type="button" id="checkBtn" class="btn btn-info ml-3">중복확인</button>
+			</div>
+			<span class="text-sm-left text-danger hidden" id="duplicateStr">중복된 url 입니다</span>
+			<span class="text-sm-left text-info hidden" id="possibleStr">저장 가능한 url 입니다</span>
+			<button type="submit" id="addBtn" class="btn btn-success form-control mt-3">추가</button>
 		</div>
 		
 	</div>
@@ -41,6 +52,39 @@
 	<script>
 		
 		$(document).ready(function() {
+			
+			$("#checkBtn").on("click", function() {
+				
+				let url = $("#urlInput").val();
+				
+				if (url == "") {
+					alert("주소를 입력하세요");
+					return ;
+				}
+				
+				$.ajax({
+					type:"get"
+					, url:"/ajax/bookmark/is_duplicate"
+					, data:{"url":url}
+					// resp 결과 처리
+					, success:function(data) {
+						// {"is_duplicate":true} or {"is_duplicate":false} 
+						if (data.is_duplicate) {
+							$("#duplicateStr").removeClass("hidden");
+							$("#possibleStr").addClass("hidden");
+						}
+						else {
+							$("#duplicateStr").addClass("hidden");
+							$("#possibleStr").removeClass("hidden");
+						}
+					}
+					, error:function() {
+						alert("중복 확인 에러 발생");
+					}
+				});
+				
+			});
+			
 			
 			$("#addBtn").on("click", function() {
 				
@@ -62,6 +106,12 @@
 				if (!(url.startsWith("http://") || url.startsWith("https://"))) {
 					alert("주소값이 유효하지 않습니다");
 					return ;
+				}
+				
+				// url 이 중복될 경우 추가 되지 않도록
+				if ($("#duplicateStr").is(":visible")) {
+					alert("중복된 url 입니다");
+					return;
 				}
 				
 				<%-- form --%>

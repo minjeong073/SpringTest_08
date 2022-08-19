@@ -34,6 +34,7 @@
 					<th>No.</th>
 					<th>이름</th>
 					<th>주소</th>
+					<th></th>
 				</tr>
 			</thead>
 			
@@ -43,6 +44,7 @@
 					<td>${status.count }</td>
 					<td>${bookmark.name }</td>
 					<td><a href="${bookmark.url }" target="_blank"> ${bookmark.url } </a></td>
+					<td><button class="btn btn-danger removeBtn" name="remove" value="${bookmark.id }">삭제</button></td>
 				</tr>
 			
 			</c:forEach>
@@ -51,6 +53,28 @@
 		</table>
 	
 	</div>
+	
+	<script>
+		
+		// class 속성을 활용해서 이벤트 등록하기 (여러 버튼에 이벤트 등록하기 위해)
+		// 현재 이벤트가 발생한 버튼 객체 가져오기 $(this)
+		// 해당 버튼 객체에 삭제 대상 id 가 포함되어 있어야 한다 (data 속성)
+		
+		// el, jstl : server 에서
+		// js : 다 만들어진 html (client) 에서 
+	
+		$(document).ready(function() {
+			
+			$(".removeBtn").on("click", function() {
+				let removeId = $(this).val();
+				
+				alert(removeId);
+				
+				
+			});
+		});
+	
+	</script>
 	
 </body>
 </html>

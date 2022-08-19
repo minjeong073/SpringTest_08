@@ -41,5 +41,18 @@
 		
 	</insert>
 	
+	<!-- url 중복 확인 -->
+	<select id="selectCountUrl" parameterType="string" resultType="int">
+	
+		SELECT
+			count(*)
+		FROM
+			`bookmark`
+		WHERE
+			`url` = #{url}
+	
+	</select>
+	
+	
 	
 </mapper>

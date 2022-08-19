@@ -66,5 +66,19 @@ public class BookmarkController {
 		// return "redirect:/ajax/bookmark/list";
 		return map;
 	}
+	
+	
+	// url 중복 확인
+	@GetMapping("/is_duplicate")
+	@ResponseBody
+	public Map<String, Boolean> isDuplicate(
+			@RequestParam("url") String url) {
+		
+		Map<String, Boolean> map = new HashMap<>();
+		
+		map.put("is_duplicate", bookmarkBO.isDuplicate(url));
+		
+		return map;
+	}
 
 }

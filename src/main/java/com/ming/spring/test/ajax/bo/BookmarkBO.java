@@ -23,4 +23,11 @@ public class BookmarkBO {
 	public int addBookmark(String name, String url) {
 		return bookmarkDAO.insertBookmark(name, url);
 	}
+	
+	// url 중복 확인
+	public boolean isDuplicate(String url) {
+	
+		// count = 0 인 경우 중복 없음 -> false	
+		return bookmarkDAO.selectCountUrl(url) != 0;
+	}
 }

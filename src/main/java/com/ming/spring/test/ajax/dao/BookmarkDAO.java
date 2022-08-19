@@ -17,4 +17,7 @@ public interface BookmarkDAO {
 	public int insertBookmark(
 			@Param("name") String name
 			, @Param("url") String url);
+	
+	// url 중복 확인
+	public int selectCountUrl(@Param("url") String url);
 }
