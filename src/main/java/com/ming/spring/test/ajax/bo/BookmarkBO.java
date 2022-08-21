@@ -30,4 +30,12 @@ public class BookmarkBO {
 		// count = 0 인 경우 중복 없음 -> false	
 		return bookmarkDAO.selectCountUrl(url) != 0;
 	}
+	
+	// 삭제 기능
+	public boolean removeBookmark(int id) {
+		
+		// delete 성공할 경우 1 
+		return bookmarkDAO.deleteBookmark(id) == 1;
+	}
+	
 }

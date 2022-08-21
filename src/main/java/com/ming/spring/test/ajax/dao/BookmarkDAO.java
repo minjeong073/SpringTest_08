@@ -20,4 +20,8 @@ public interface BookmarkDAO {
 	
 	// url 중복 확인
 	public int selectCountUrl(@Param("url") String url);
+	
+	// 삭제 기능
+	public int deleteBookmark(@Param("id") int id);
+	
 }

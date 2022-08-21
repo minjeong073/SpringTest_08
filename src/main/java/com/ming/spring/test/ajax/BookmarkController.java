@@ -80,5 +80,22 @@ public class BookmarkController {
 		
 		return map;
 	}
+	
+	// 삭제 기능
+	@GetMapping("/remove")
+	@ResponseBody
+	public Map<String, Boolean> removeBookmark(
+			@RequestParam("id") int id) {
+		
+		Map<String, Boolean> map = new HashMap<>();
+		
+		if (bookmarkBO.removeBookmark(id)) {
+			map.put("result", true);			
+		} else {
+			map.put("result", false);
+		}
+		
+		return map;
+	}
 
 }

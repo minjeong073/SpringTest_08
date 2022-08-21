@@ -16,6 +16,13 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+<!-- jQuery cdn -->
+<script 
+	src="https://code.jquery.com/jquery-3.6.0.min.js" 
+	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
+	crossorigin="anonymous">
+</script>
 
 </head>
 <body>
@@ -44,7 +51,7 @@
 					<td>${status.count }</td>
 					<td>${bookmark.name }</td>
 					<td><a href="${bookmark.url }" target="_blank"> ${bookmark.url } </a></td>
-					<td><button class="btn btn-danger removeBtn" name="remove" value="${bookmark.id }">삭제</button></td>
+					<td><button type="button" class="btn btn-danger removeBtn" value="${bookmark.id }">삭제</button></td>
 				</tr>
 			
 			</c:forEach>
@@ -68,8 +75,24 @@
 			$(".removeBtn").on("click", function() {
 				let removeId = $(this).val();
 				
-				alert(removeId);
-				
+				$.ajax({
+					type:"get"
+					, url:"/ajax/bookmark/remove"
+					, data:{"id":removeId}
+					, success:function(data) {
+						// {"result":true} or {"result":false}
+						if (data.result) {
+							alert("삭제되었습니다");
+							location.href = "/ajax/bookmark/list";
+						} else {
+							alert("삭제 실패");
+						}
+					}
+					, error:function() {
+						alert("삭제 오류 발생");
+					}
+					
+				});
 				
 			});
 		});

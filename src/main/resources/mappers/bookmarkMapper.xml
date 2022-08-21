@@ -53,6 +53,14 @@
 	
 	</select>
 	
+	<!-- 삭제 기능 -->
+	<delete id="deleteBookmark" parameterType="int">
+	
+		DELETE FROM
+			`bookmark`
+		WHERE `id` = #{id}
+	
+	</delete>
 	
 	
 </mapper>
