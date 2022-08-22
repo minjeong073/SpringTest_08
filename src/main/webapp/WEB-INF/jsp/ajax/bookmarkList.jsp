@@ -51,7 +51,7 @@
 					<td>${status.count }</td>
 					<td>${bookmark.name }</td>
 					<td><a href="${bookmark.url }" target="_blank"> ${bookmark.url } </a></td>
-					<td><button type="button" class="btn btn-danger removeBtn" value="${bookmark.id }">삭제</button></td>
+					<td><button type="button" class="btn btn-danger removeBtn" data-bookmark-id="${bookmark.id }">삭제</button></td>
 				</tr>
 			
 			</c:forEach>
@@ -63,27 +63,32 @@
 	
 	<script>
 		
-		// class 속성을 활용해서 이벤트 등록하기 (여러 버튼에 이벤트 등록하기 위해)
+		// class 속성을 활용해서 이벤트 등록하기 (여러 버튼에 같은 이벤트 등록하기 위해)
 		// 현재 이벤트가 발생한 버튼 객체 가져오기 $(this)
 		// 해당 버튼 객체에 삭제 대상 id 가 포함되어 있어야 한다 (data 속성)
+		// data-'변수명'="" : 원하는 변수명을 넣어 "" 안의 값 저장해서 사용
 		
 		// el, jstl : server 에서
 		// js : 다 만들어진 html (client) 에서 
 	
 		$(document).ready(function() {
 			
+			<%-- 삭제 버튼 --%>
 			$(".removeBtn").on("click", function() {
-				let removeId = $(this).val();
+				// data 속성의 변수명에 해당하는 tag 의 data 값 가져옴
+				let bookmarkId = $(this).data("bookmark-id");
 				
 				$.ajax({
 					type:"get"
 					, url:"/ajax/bookmark/remove"
-					, data:{"id":removeId}
+					, data:{"id":bookmarkId}
 					, success:function(data) {
 						// {"result":true} or {"result":false}
 						if (data.result) {
 							alert("삭제되었습니다");
-							location.href = "/ajax/bookmark/list";
+							// 현재 페이지 새로고침
+							location.reload();
+							// location.href = "/ajax/bookmark/list";
 						} else {
 							alert("삭제 실패");
 						}

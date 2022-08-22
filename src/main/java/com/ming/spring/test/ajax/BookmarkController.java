@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -69,7 +70,7 @@ public class BookmarkController {
 	
 	
 	// url 중복 확인
-	@GetMapping("/is_duplicate")
+	@PostMapping("/is_duplicate")
 	@ResponseBody
 	public Map<String, Boolean> isDuplicate(
 			@RequestParam("url") String url) {
@@ -89,11 +90,7 @@ public class BookmarkController {
 		
 		Map<String, Boolean> map = new HashMap<>();
 		
-		if (bookmarkBO.removeBookmark(id)) {
-			map.put("result", true);			
-		} else {
-			map.put("result", false);
-		}
+		map.put("result", bookmarkBO.removeBookmark(id));
 		
 		return map;
 	}
