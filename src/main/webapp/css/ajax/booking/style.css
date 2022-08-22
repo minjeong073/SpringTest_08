@@ -1,0 +1,43 @@
+#wrap {
+  width: 1200px;
+  margin: auto;
+}
+
+header {
+  height: 100px;
+}
+
+.main-title > a {
+	text-decoration: none;
+	color: rgb(80, 47, 47);
+}
+
+nav {
+  height: 40px;
+  background-color: chocolate;
+}
+
+.nav .nav-item :hover {
+  background-color: rgb(60, 99, 56);
+}
+
+section {
+  height: 800px;
+}
+
+section > .img {
+  height: 500px;
+}
+
+section > .main-contents {
+  height: 300px;
+  background-color: rgb(153, 75, 31);
+}
+
+.main-contents > .reservation {
+  background-color: chocolate;
+}
+
+footer {
+  height: 100px;
+}
