@@ -6,6 +6,7 @@
  
 <mapper namespace="com.ming.spring.test.ajax.booking.dao.BookingDAO">
 
+	<!-- 예약 목록 -->
 	<select id="selectBookingList" resultType="com.ming.spring.test.ajax.booking.model.Booking">
 	
 		SELECT
@@ -23,4 +24,44 @@
 			
 	</select>
 
+
+	<!-- 삭제 -->
+	<delete id="deleteBooking" parameterType="int">
+		
+		DELETE FROM
+			`booking`
+		WHERE
+			`id` = #{id}
+			
+	</delete>
+	
+	
+	<!-- 입력 값 저장 -->
+	<insert id="insertBooking" parameterType="map">
+		
+		INSERT INTO
+			`booking`
+		(
+			`name`
+			, `headcount`
+			, `day`
+			, `date`
+			, `phoneNumber`
+			, `state`
+			, `createdAt`
+			, `updatedAt`
+		)
+		VALUES
+		(
+			#{name}
+			, #{headcount}
+			, #{day}
+			, #{date}
+			, #{phoneNumber}
+			, "대기중"
+			, now()
+			, now()
+		)	
+	</insert>
+	
 </mapper>

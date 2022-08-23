@@ -89,6 +89,22 @@
 			
 			let clientId = $(this).data("client-id");
 			
+			$.ajax({
+				type:"get"
+				, url:"/ajax/booking/delete"
+				, data:{"clientId":clientId}
+				, success:function(data) {
+					if (data.result == "success") {
+						alert("삭제 되었습니다");
+						location.reload();
+					} else {
+						alert("삭제 실패");
+					}
+				}
+				, error:function() {
+					alert("삭제 에러");
+				}
+			});
 		});
 		
 	});
