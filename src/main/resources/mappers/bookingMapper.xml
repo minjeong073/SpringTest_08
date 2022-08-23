@@ -64,4 +64,10 @@
 		)	
 	</insert>
 	
+	<!-- 예약 조회 -->
+	<select id="selectSearchBooking" parameterType="map" resultType="com.ming.spring.test.ajax.booking.model.Booking">
+	
+		
+	</select>
+	
 </mapper>

@@ -78,5 +78,22 @@ public class BookingController {
 		
 		return map;	
 	}
+	
+	// 조회
+	@PostMapping("/search")
+	@ResponseBody
+	public Map<String, Boolean> search(Model model
+			, @RequestParam("inputName") String name
+			, @RequestParam("inputPhoneNumber") String phoneNumber) {
+		
+		model.addAttribute("",);
+		
+		Map<String, Boolean> map = new HashMap<>();
+		
+		map.put("result", );
+		
+		
+		
+	}
 
 }

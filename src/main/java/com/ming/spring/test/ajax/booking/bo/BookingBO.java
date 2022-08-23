@@ -26,7 +26,11 @@ public class BookingBO {
 	
 	// input 값 저장
 	public boolean inputBooking(String name, String date, int day, int headcount, String phoneNumber) {
-		return bookingDAO.insertBooking(name, date, day, headcount, phoneNumber) == 1;
+		return bookingDAO.insertBooking(name, date, day, headcount, phoneNumber) == 1;	
+	}
+	
+	// search
+	public boolean searchBooking(String name, String phoneNumber) {
 		
 	}
 }
