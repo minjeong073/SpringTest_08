@@ -58,16 +58,44 @@
 			, #{day}
 			, #{date}
 			, #{phoneNumber}
-			, "대기중"
+			, #{state}
 			, now()
 			, now()
 		)	
 	</insert>
 	
-	<!-- 예약 조회 -->
+	<!-- 예약 조회 - 여부 확인 -->
+	<select id="selectCountSearchBooking" parameterType="map" resultType="int">
+		
+		SELECT
+			count(*)
+		FROM
+			`booking`
+		WHERE
+			`name` = #{inputName}
+			AND `phoneNumber` = #{inputPhoneNumber}
+	
+	</select>
+	
+	<!-- 예약 조회 - 결과 가져오기 -->
 	<select id="selectSearchBooking" parameterType="map" resultType="com.ming.spring.test.ajax.booking.model.Booking">
 	
-		
+		SELECT
+			`id`
+			, `name`
+			, `headcount`
+			, `day`
+			, `date`
+			, `phoneNumber`
+			, `state`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`booking`
+		WHERE
+			`name` = #{inputName}
+			AND `phoneNumber` = #{inputPhoneNumber}
+			
 	</select>
 	
 </mapper>

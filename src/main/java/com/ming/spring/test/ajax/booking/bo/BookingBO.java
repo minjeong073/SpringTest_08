@@ -1,6 +1,8 @@
 package com.ming.spring.test.ajax.booking.bo;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,12 +27,20 @@ public class BookingBO {
 	}
 	
 	// input 값 저장
-	public boolean inputBooking(String name, String date, int day, int headcount, String phoneNumber) {
-		return bookingDAO.insertBooking(name, date, day, headcount, phoneNumber) == 1;	
+	public boolean addBooking(String name, String date, int day, int headcount, String phoneNumber) {
+		// 예약 상태는 사용자 입력이 아니기 때문에 BO 에서 넣어줌
+		// 쿼리로 "대기중" 보다 안전
+		return bookingDAO.insertBooking(name, date, day, headcount, phoneNumber, "대기중") == 1;	
 	}
 	
-	// search
-	public boolean searchBooking(String name, String phoneNumber) {
+	// search	
+	public Map<String, Object> searchBooking(String name, String phoneNumber) {
+		Map<String, Object> map = new HashMap<>();
+		// count : 조회 여부(1)
+		// object : 조회된 정보(Booking)
+		map.put("count", bookingDAO.selectCountSearchBooking(name, phoneNumber));
+		map.put("booking", bookingDAO.selectSearchBooking(name, phoneNumber));
 		
+		return map;
 	}
 }

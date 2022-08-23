@@ -68,7 +68,7 @@
 							<td class="text-success">${client.state }</td>
 							</c:when>
 						</c:choose>
-						<td><button class="btn btn-danger deleteBtn" data-client-id="${client.id }">삭제</button></td>
+						<td><button class="btn btn-danger delete-btn" data-client-id="${client.id }">삭제</button></td>
 					</tr>
 				</c:forEach>
 				</tbody>
@@ -85,7 +85,7 @@
 		
 		
 		// 삭제 버튼
-		$(".deleteBtn").on("click", function() {
+		$(".delete-btn").on("click", function() {
 			
 			let clientId = $(this).data("client-id");
 			

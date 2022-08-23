@@ -56,8 +56,8 @@ public class BookingController {
 			, @RequestParam("phoneNumber") String phoneNumber) {
 		
 		Map<String, Boolean> map = new HashMap<>();
-		
-		map.put("result", bookingBO.inputBooking(name, date, day, headcount, phoneNumber));
+		// {"result", true} or {"result", false}
+		map.put("result", bookingBO.addBooking(name, date, day, headcount, phoneNumber));
 		
 		return map;
 	}
@@ -82,18 +82,22 @@ public class BookingController {
 	// 조회
 	@PostMapping("/search")
 	@ResponseBody
-	public Map<String, Boolean> search(Model model
+	public Map<String, Object> search(Model model
 			, @RequestParam("inputName") String name
 			, @RequestParam("inputPhoneNumber") String phoneNumber) {
 		
-		model.addAttribute("",);
+		Map<String, Object> map = bookingBO.searchBooking(name, phoneNumber);
+		Map<String, Object> result = new HashMap<>();
 		
-		Map<String, Boolean> map = new HashMap<>();
+		if (map.get("count").equals(1)) {
+			result.put("result", true);
+			result.put("booking", map.get("booking"));
+		} else {
+			result.put("result", false);
+			result.put("booking", map.get("booking"));
+		}
 		
-		map.put("result", );
-		
-		
-		
+		return result;
 	}
 
 }

@@ -98,12 +98,39 @@
 			return ;        	
         }
         
+        if (!inputPhoneNumber.startsWith("010-")) {
+        	alert("알맞은 형태의 번호를 입력하세요");
+        	return ;
+        }
+        
+        $("#inputNumber").on("propertychange change keyup paste input", function() {
+        	if (inputPhoneNumber.length > 14 || ) {
+        		alert("알맞은 형태의 번호를 입력");
+        		return ;
+        	}
+        });
+        
 		
         $.ajax({
         	type:"post"
         	, url:"/ajax/booking/search"
         	, data:{"inputName":inputName, "inputPhoneNumber":inputPhoneNumber}
+        	, dataType:"json"
         	, success:function(data) {
+        		// {"result":true} or {"result":false}
+        		// {"booking":Booking}
+        		if (data.result) {
+        			var booking = data.booking;
+        			
+        			alert("이름 : " + booking.name + "\n"
+        					+ "날짜 : " + booking.date + "\n"
+        					+ "일수 : " + booking.day + "\n"
+        					+ "인원 : " + booking.headcount + "\n"
+        					+ "상태 : " + booking.state);
+        			
+        		} else {
+        			alert("조회 결과가 없습니다");
+        		}
         		
         	}
         	, error:function() {

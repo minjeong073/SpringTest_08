@@ -2,12 +2,15 @@ package com.ming.spring.test.ajax.booking.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Booking {
 
 	private int id;
 	private String name;
 	private int headcount;
 	private int day;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="Asia/Seoul")
 	private Date date;
 	private String phoneNumber;
 	private String state;

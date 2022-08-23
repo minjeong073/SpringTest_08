@@ -22,10 +22,16 @@ public interface BookingDAO {
 			, @Param("date") String date
 			, @Param("day") int day
 			, @Param("headcount") int headcount
-			, @Param("phoneNumber") String phoneNumber);
+			, @Param("phoneNumber") String phoneNumber
+			, @Param("state") String state);
 	
-	// 조회
+	// 조회 - 여부 확인
+	public int selectCountSearchBooking(
+			@Param("inputName") String name
+			, @Param("inputPhoneNumber") String phoneNumber);
+	
+	// 조회 - 가져오기
 	public Booking selectSearchBooking(
 			@Param("inputName") String name
-			,@Param("inputPhoneNumber") String phoneNumber );
+			,@Param("inputPhoneNumber") String phoneNumber);
 }

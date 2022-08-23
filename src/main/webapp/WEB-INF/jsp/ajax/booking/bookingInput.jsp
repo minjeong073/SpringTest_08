@@ -45,7 +45,7 @@
 				<label>숙박인원</label>
 				<input type="text" class="form-control" id="headcountInput">
 				<label>전화번호</label> 
-				<input type="text" class="form-control" id="phoneNumberInput">
+				<input type="text" class="form-control" id="phoneNumberInput" placeholder="010-0000-0000">
 				<button class="btn btn-warning form-control mt-3" id="bookingBtn">예약하기</button>			
 			</div>
 		
@@ -57,6 +57,10 @@
 	
 	<script>
 		$(document).ready(function() {
+			
+			// 유효성 검사
+			// 입력 내용이 모두 있는지
+			// 숙박일수, 인원수 숫자가 아닌 값이 있는지
 			
 			$("#bookingBtn").on("click", function() {
 				
@@ -82,12 +86,22 @@
 					return ;
 				}
 				
+				if (typeof(dayInput) !== "number") {
+					alert("숙박일수 타입을 확인해주세요");
+					return ;
+				}
+				
 				if (headcountInput == "") {
 					alert("숙박인원 을 입력하세요");
 				}
 				
 				if (phoneNumberInput == "") {
 					alert("전화번호 를 입력하세요");
+					return ;
+				}
+				
+				if (!phoneNumberInput.startsWith("010-")) {
+					alert("알맞은 형태의 번호를 입력하세요");
 					return ;
 				}
 				
@@ -110,9 +124,7 @@
 				});
 			});
 			
-			$("#dateInput").datepicker({
-				dateFormat:"yyyy-MM-dd"
-			});
+			
 			
 		});
 		
