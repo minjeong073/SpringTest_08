@@ -34,4 +34,11 @@ public interface BookingDAO {
 	public Booking selectSearchBooking(
 			@Param("inputName") String name
 			,@Param("inputPhoneNumber") String phoneNumber);
+	
+	// 조회 다른 풀이
+	public Booking selectFindBooking(
+			@Param("inputName") String name
+			,@Param("inputPhoneNumber") String phoneNumber);
+	// select 된 결과가 없을 경우 null 을 리턴
+	
 }

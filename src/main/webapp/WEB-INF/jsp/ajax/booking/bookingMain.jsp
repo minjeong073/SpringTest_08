@@ -79,7 +79,14 @@
   <script>
 
     $(document).ready(function() {
-
+    	
+    	$("#inputNumber").on("propertychange change keyup paste input", function() {
+        	if ($(this).val().length > 14) {
+        		alert("알맞은 형태의 번호를 입력하세요");
+        		return ;
+        	}
+        });
+    	
       // 유효성 검사
       $("#lookupBtn").on('click', function () {
 		
@@ -102,15 +109,7 @@
         	alert("알맞은 형태의 번호를 입력하세요");
         	return ;
         }
-        
-        $("#inputNumber").on("propertychange change keyup paste input", function() {
-        	if (inputPhoneNumber.length > 14 || ) {
-        		alert("알맞은 형태의 번호를 입력");
-        		return ;
-        	}
-        });
-        
-		
+        	
         $.ajax({
         	type:"post"
         	, url:"/ajax/booking/search"
@@ -118,9 +117,9 @@
         	, dataType:"json"
         	, success:function(data) {
         		// {"result":true} or {"result":false}
-        		// {"booking":Booking}
+        		// {"data":Booking}
         		if (data.result) {
-        			var booking = data.booking;
+        			var booking = data.data;
         			
         			alert("이름 : " + booking.name + "\n"
         					+ "날짜 : " + booking.date + "\n"
@@ -137,12 +136,46 @@
         		alert("조회 에러");
         	}
         	
-        });
+        }); // ajax
         
-      });
+    	// 조회 다른 풀이
+        $.ajax({
+        	type:"post"
+        	, url:"/ajax/booking/find"
+        	, data:{"inputName":inputName, "inputPhoneNumber":inputPhoneNumber}
+        	, success:function(data) {
+        		// 조회 안될 경우 = 비워진 경우
+        		/*
+        		if (data == "") {
+        			alert("조회 실패");
+        		} else {
+        			alert("이름 : " + data.name
+            				+ "\n날짜 : " + data.date.slice(0,10)
+            				+ "\n숙박일수 : " + data.day
+            				+ "\n숙박인원 : " + data.headcount
+            				+ "\n상태 : " + data.state);	
+        		}
+        		*/
+        		
+        		if (data.result == "success") {
+        			alert("이름 : " + data.data.name
+            				+ "\n날짜 : " + data.data.date.slice(0,10)
+            				+ "\n숙박일수 : " + data.data.day
+            				+ "\n숙박인원 : " + data.data.headcount
+            				+ "\n상태 : " + data.data.state);	
+        		} else {
+        			alert("조회 실패");
+        		}
+        	}
+        	, error:function() {
+        		alert("조회 에러");
+        	}
+        }); // ajax
+        
+      }); // lookupBtn
 
-
-    });
+    }); 
+    
   </script>
 </body>
 </html>

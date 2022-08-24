@@ -86,13 +86,20 @@
 					return ;
 				}
 				
-				if (typeof(dayInput) !== "number") {
-					alert("숙박일수 타입을 확인해주세요");
+				// 숫자로만 표현되었는지 -> is Not a Number
+				if (isNaN(dayInput)) {
+					alert("숙박일수 는 숫자 만 입력 가능합니다");
 					return ;
 				}
 				
 				if (headcountInput == "") {
 					alert("숙박인원 을 입력하세요");
+					return ;
+				}
+				
+				if (isNaN(headcountInput)) {
+					alert("숙박인원 은 숫자 만 입력 가능합니다");
+					return ;
 				}
 				
 				if (phoneNumberInput == "") {
@@ -101,7 +108,7 @@
 				}
 				
 				if (!phoneNumberInput.startsWith("010-")) {
-					alert("알맞은 형태의 번호를 입력하세요");
+					alert("알맞은 형태의 전화번호를 입력하세요");
 					return ;
 				}
 				

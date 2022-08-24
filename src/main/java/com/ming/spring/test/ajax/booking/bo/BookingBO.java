@@ -43,4 +43,9 @@ public class BookingBO {
 		
 		return map;
 	}
+	
+	// 조회 다른 풀이
+	public Booking findBooking(String name, String phoneNumber) {
+		return bookingDAO.selectFindBooking(name, phoneNumber);
+	}
 }

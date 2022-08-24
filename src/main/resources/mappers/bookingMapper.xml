@@ -98,4 +98,25 @@
 			
 	</select>
 	
+	<!-- 조회 다른 풀이 -->
+	<select id="selectFindBooking" parameterType="map" resultType="com.ming.spring.test.ajax.booking.model.Booking">
+	
+		SELECT
+			`id`
+			, `name`
+			, `headcount`
+			, `day`
+			, `date`
+			, `phoneNumber`
+			, `state`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`booking`
+		WHERE
+			`name` = #{inputName}
+			AND `phoneNumber` = #{inputPhoneNumber}
+			
+	</select>
+	
 </mapper>
